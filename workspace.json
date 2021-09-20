@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "projects": {
+    "adibas": {
+      "root": "apps/adibas",
+      "sourceRoot": "apps/adibas/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/adibas",
+            "index": "apps/adibas/src/index.html",
+            "main": "apps/adibas/src/main.tsx",
+            "polyfills": "apps/adibas/src/polyfills.ts",
+            "tsConfig": "apps/adibas/tsconfig.app.json",
+            "assets": ["apps/adibas/src/favicon.ico", "apps/adibas/src/assets"],
+            "styles": ["apps/adibas/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/adibas/src/environments/environment.ts",
+                  "with": "apps/adibas/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "adibas:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "adibas:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/adibas/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/adibas"],
+          "options": {
+            "jestConfig": "apps/adibas/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "adibas-e2e": {
+      "root": "apps/adibas-e2e",
+      "sourceRoot": "apps/adibas-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/adibas-e2e/cypress.json",
+            "devServerTarget": "adibas:serve",
+            "tsConfig": "apps/adibas-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "adibas:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/adibas-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "adibas"
+}
