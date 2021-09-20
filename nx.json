@@ -33,6 +33,16 @@
     "adibas-e2e": {
       "tags": [],
       "implicitDependencies": ["adibas"]
+    },
+    "mike": {
+      "tags": []
+    },
+    "mike-e2e": {
+      "tags": [],
+      "implicitDependencies": ["mike"]
+    },
+    "ui-header": {
+      "tags": []
     }
   }
 }
